@@ -24,7 +24,36 @@
   <entry>
     <title>git常用命令</title>
     <url>/blog/2020/10/04/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><h3 id="查看仓库当前状态"><a href="#查看仓库当前状态" class="headerlink" title="查看仓库当前状态"></a>查看仓库当前状态</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<h3 id="工作区查看文件的修改"><a href="#工作区查看文件的修改" class="headerlink" title="工作区查看文件的修改"></a>工作区查看文件的修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git diff &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="清除工作区所有的修改"><a href="#清除工作区所有的修改" class="headerlink" title="清除工作区所有的修改"></a>清除工作区所有的修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout .</span><br></pre></td></tr></table></figure>
+
+<h3 id="将工作区的修改添加到暂存区"><a href="#将工作区的修改添加到暂存区" class="headerlink" title="将工作区的修改添加到暂存区"></a>将工作区的修改添加到暂存区</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;file&gt;...</span><br></pre></td></tr></table></figure>
+
+<h3 id="清除暂存区所有的修改"><a href="#清除暂存区所有的修改" class="headerlink" title="清除暂存区所有的修改"></a>清除暂存区所有的修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset .</span><br></pre></td></tr></table></figure>
+
+<h3 id="将暂存区的修改提交到本地库"><a href="#将暂存区的修改提交到本地库" class="headerlink" title="将暂存区的修改提交到本地库"></a>将暂存区的修改提交到本地库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;这是必填的提交信息&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看提交记录"><a href="#查看提交记录" class="headerlink" title="查看提交记录"></a>查看提交记录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="撤销本次提交"><a href="#撤销本次提交" class="headerlink" title="撤销本次提交"></a>撤销本次提交</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
+
+<p>reset后的参数说明</p>
+<ul>
+<li>mixed 不删除工作空间改动代码，撤销commit，并且撤销git add . 操作这个为默认参数,git reset –mixed HEAD^ 和 git reset HEAD^ 效果是一样的。</li>
+<li>soft 不删除工作空间改动代码，撤销commit，不撤销git add .</li>
+<li>hard 删除工作空间改动代码，撤销commit，撤销git add . 注意完成这个操作后，就恢复到了上一次的commit状态</li>
+</ul>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>git</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -58,6 +87,7 @@
       </categories>
       <tags>
         <tag>后端</tag>
+        <tag>Java</tag>
         <tag>spring</tag>
       </tags>
   </entry>
