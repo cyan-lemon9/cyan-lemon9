@@ -109,6 +109,36 @@
       </tags>
   </entry>
   <entry>
+    <title>虫儿飞</title>
+    <url>/blog/2020/10/07/%E8%99%AB%E5%84%BF%E9%A3%9E/</url>
+    <content><![CDATA[<p><img src="v.jpg" alt="傻小瓜"></p>
+<p>黑黑的天空低垂</p>
+<p>亮亮的繁星相随</p>
+<p>虫儿飞 </p>
+<p>虫儿飞</p>
+<p>你在思念谁</p>
+<p>天上的星星流泪</p>
+<p>地上的玫瑰枯萎</p>
+<p>冷风吹</p>
+<p> 冷风吹</p>
+<p>只要有你陪</p>
+<p>虫儿飞</p>
+<p>花儿睡</p>
+<p>一双又一对才美</p>
+<p>不怕天黑</p>
+<p>只怕心碎</p>
+<p>不管累不累</p>
+<p>也不管东南西北</p>
+<p><img src="y.jpg" alt="傻小瓜"></p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>傻小瓜</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>配置npm镜像仓库</title>
     <url>/blog/2020/10/04/%E9%85%8D%E7%BD%AEnpm%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</url>
     <content><![CDATA[<p>NPM是Node提供的模块管理工具，npm默认的仓库地址是在国外网站，速度较慢，建议大家设置到淘宝镜像。但是切换镜像是比较麻烦的。推荐一款切换镜像的工具：nrm</p>
