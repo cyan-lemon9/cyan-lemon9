@@ -40,13 +40,17 @@
 
 <h3 id="撤销本次提交"><a href="#撤销本次提交" class="headerlink" title="撤销本次提交"></a>撤销本次提交</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
 
+<h3 id="回退到指定版本"><a href="#回退到指定版本" class="headerlink" title="回退到指定版本"></a>回退到指定版本</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
+
 <p>reset后的参数说明</p>
 <ul>
 <li>mixed 不删除工作空间改动代码，撤销commit，并且撤销git add . 操作这个为默认参数,git reset –mixed HEAD^ 和 git reset HEAD^ 效果是一样的。</li>
 <li>soft 不删除工作空间改动代码，撤销commit，不撤销git add .</li>
 <li>hard 删除工作空间改动代码，撤销commit，撤销git add . 注意完成这个操作后，就恢复到了上一次的commit状态</li>
 </ul>
-]]></content>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><h3 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建分支并切换"><a href="#创建分支并切换" class="headerlink" title="创建分支并切换"></a>创建分支并切换</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>后端</category>
       </categories>
