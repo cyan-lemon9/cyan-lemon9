@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Maven配置</title>
+    <url>/blog/2020/10/04/Maven%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="配置JDK版本"><a href="#配置JDK版本" class="headerlink" title="配置JDK版本"></a>配置JDK版本</h2><p>修改settings.xml ,添加如下内容</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>development<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置Maven阿里镜像源"><a href="#配置Maven阿里镜像源" class="headerlink" title="配置Maven阿里镜像源"></a>配置Maven阿里镜像源</h2><p>修改settings.xml ,添加如下内容</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置Maven本地仓库"><a href="#配置Maven本地仓库" class="headerlink" title="配置Maven本地仓库"></a>配置Maven本地仓库</h2><p>修改settings.xml ,添加如下内容</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>/opt/apache-maven-3.6.0/repository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>Java</tag>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git常用命令</title>
     <url>/blog/2020/10/04/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><h3 id="查看仓库当前状态"><a href="#查看仓库当前状态" class="headerlink" title="查看仓库当前状态"></a>查看仓库当前状态</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
@@ -49,27 +70,6 @@
       <tags>
         <tag>后端</tag>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Maven配置</title>
-    <url>/blog/2020/10/04/Maven%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h2 id="配置JDK版本"><a href="#配置JDK版本" class="headerlink" title="配置JDK版本"></a>配置JDK版本</h2><p>修改settings.xml ,添加如下内容</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>development<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="配置Maven阿里镜像源"><a href="#配置Maven阿里镜像源" class="headerlink" title="配置Maven阿里镜像源"></a>配置Maven阿里镜像源</h2><p>修改settings.xml ,添加如下内容</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="配置Maven本地仓库"><a href="#配置Maven本地仓库" class="headerlink" title="配置Maven本地仓库"></a>配置Maven本地仓库</h2><p>修改settings.xml ,添加如下内容</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>/opt/apache-maven-3.6.0/repository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>后端</tag>
-        <tag>Java</tag>
-        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
@@ -308,30 +308,6 @@
       </tags>
   </entry>
   <entry>
-    <title>配置npm镜像仓库</title>
-    <url>/blog/2020/10/04/%E9%85%8D%E7%BD%AEnpm%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</url>
-    <content><![CDATA[<p>NPM是Node提供的模块管理工具，npm默认的仓库地址是在国外网站，速度较慢，建议大家设置到淘宝镜像。但是切换镜像是比较麻烦的。推荐一款切换镜像的工具：nrm</p>
-<p>安装nrm，这里-g代表全局安装。可能需要一点儿时间</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install nrm -g</span><br></pre></td></tr></table></figure>
-
-<p>然后通过nrm ls命令查看npm的仓库列表,带*的就是当前选中的镜像仓库：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">C:\Users\xiejinchi&gt;nrm ls</span><br><span class="line"></span><br><span class="line">  npm -------- https://registry.npmjs.org/</span><br><span class="line">  yarn ------- https://registry.yarnpkg.com/</span><br><span class="line">  cnpm ------- http://r.cnpmjs.org/</span><br><span class="line">* taobao ----- https://registry.npm.taobao.org/</span><br><span class="line">  nj --------- https://registry.nodejitsu.com/</span><br><span class="line">  npmMirror -- https://skimdb.npmjs.com/registry/</span><br><span class="line">  edunpm ----- http://registry.enpmjs.org/</span><br></pre></td></tr></table></figure>
-
-<p>通过nrm use taobao来指定要使用的镜像源</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nrm use taobao</span><br></pre></td></tr></table></figure>
-
-<p>然后通过nrm test npm 来测试速度：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nrm test npm</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>虫儿飞</title>
     <url>/blog/2020/10/07/%E8%99%AB%E5%84%BF%E9%A3%9E/</url>
     <content><![CDATA[<p><img src="v.jpg" alt="傻小瓜"></p>
@@ -363,6 +339,30 @@
       </categories>
       <tags>
         <tag>傻小瓜</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置npm镜像仓库</title>
+    <url>/blog/2020/10/04/%E9%85%8D%E7%BD%AEnpm%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[<p>NPM是Node提供的模块管理工具，npm默认的仓库地址是在国外网站，速度较慢，建议大家设置到淘宝镜像。但是切换镜像是比较麻烦的。推荐一款切换镜像的工具：nrm</p>
+<p>安装nrm，这里-g代表全局安装。可能需要一点儿时间</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install nrm -g</span><br></pre></td></tr></table></figure>
+
+<p>然后通过nrm ls命令查看npm的仓库列表,带*的就是当前选中的镜像仓库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">C:\Users\xiejinchi&gt;nrm ls</span><br><span class="line"></span><br><span class="line">  npm -------- https://registry.npmjs.org/</span><br><span class="line">  yarn ------- https://registry.yarnpkg.com/</span><br><span class="line">  cnpm ------- http://r.cnpmjs.org/</span><br><span class="line">* taobao ----- https://registry.npm.taobao.org/</span><br><span class="line">  nj --------- https://registry.nodejitsu.com/</span><br><span class="line">  npmMirror -- https://skimdb.npmjs.com/registry/</span><br><span class="line">  edunpm ----- http://registry.enpmjs.org/</span><br></pre></td></tr></table></figure>
+
+<p>通过nrm use taobao来指定要使用的镜像源</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nrm use taobao</span><br></pre></td></tr></table></figure>
+
+<p>然后通过nrm test npm 来测试速度：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nrm test npm</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>node</tag>
       </tags>
   </entry>
   <entry>
