@@ -109,6 +109,128 @@
       </tags>
   </entry>
   <entry>
+    <title>springboot接入swagger2</title>
+    <url>/blog/2020/10/14/springboot%E6%8E%A5%E5%85%A5swagger2/</url>
+    <content><![CDATA[<h2 id="Swagger2介绍"><a href="#Swagger2介绍" class="headerlink" title="Swagger2介绍"></a>Swagger2介绍</h2><p>前后端分离开发模式中，api文档是最好的沟通方式。</p>
+<p>Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。</p>
+<ol>
+<li>及时性 (接口变更后，能够及时准确地通知相关前后端开发人员)</li>
+<li>规范性 (并且保证接口的规范性，如接口的地址，请求方式，参数及响应格式和错误信息)</li>
+<li>一致性 (接口信息一致，不会出现因开发人员拿到的文档版本不一致，而出现分歧)</li>
+<li>可测性 (直接在接口文档上进行测试，以方便理解业务)</li>
+</ol>
+<h2 id="加入依赖"><a href="#加入依赖" class="headerlink" title="加入依赖"></a>加入依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="添加配置"><a href="#添加配置" class="headerlink" title="添加配置"></a>添加配置</h2><p>首先要在配置类上加上@EnableSwagger2注解开启Swagger2</p>
+<p>然后在配置类中添加swagger2的配置</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Docket <span class="title">webApiConfig</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">            .groupName(<span class="string">&quot;webApi&quot;</span>).apiInfo(webApiInfo())</span><br><span class="line">            .select().paths(Predicates.not(PathSelectors.regex(<span class="string">&quot;/admin/.*&quot;</span>)))</span><br><span class="line">            .paths(Predicates.not(PathSelectors.regex(<span class="string">&quot;/error.*&quot;</span>)))</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> ApiInfo <span class="title">webApiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">            .title(<span class="string">&quot;网站API文档&quot;</span>)</span><br><span class="line">            .description(<span class="string">&quot;本文档描述用户中心接口&quot;</span>)</span><br><span class="line">            .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">            .contact(<span class="keyword">new</span> Contact(<span class="string">&quot;Helen&quot;</span>, <span class="string">&quot;http://baidu.com&quot;</span>, <span class="string">&quot;lemonxe@qq.com&quot;</span>))</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="API模型"><a href="#API模型" class="headerlink" title="API模型"></a>API模型</h2><p>可以添加一些自定义设置，</p>
+<p>例如：定义样例数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ApiModelProperty(value = &quot;创建时间&quot;, example = &quot;2019-01-01 8:00:00&quot;)</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line"><span class="keyword">private</span> Date gmtCreate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ApiModelProperty(value = &quot;更新时间&quot;, example = &quot;2019-01-01 8:00:00&quot;)</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line"><span class="keyword">private</span> Date gmtModified;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="定义接口说明和参数说明"><a href="#定义接口说明和参数说明" class="headerlink" title="定义接口说明和参数说明"></a>定义接口说明和参数说明</h2><p><code>@Api</code>: 定义在类上</p>
+<p><code>@ApiOperation</code>: 定义在方法上</p>
+<p><code>@ApiParam</code>: 定义在参数上</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Api(description=&quot;讲师管理&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span><span class="meta">@RequestMapping(&quot;/admin/edu/teacher&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherAdminController</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowiredprivate</span> TeacherService teacherService;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;所有讲师列表&quot;)</span></span><br><span class="line">    <span class="meta">@GetMappingpublic</span> <span class="function">List&lt;Teacher&gt; <span class="title">list</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> teacherService.list(<span class="keyword">null</span>);&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;根据ID删除讲师&quot;)</span></span><br><span class="line">    <span class="meta">@DeleteMapping(&quot;&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">removeById</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        	<span class="meta">@ApiParam(name = &quot;id&quot;, value = &quot;讲师ID&quot;, required = true)</span></span></span></span><br><span class="line"><span class="function"><span class="params">        	<span class="meta">@PathVariable</span> String id)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> teacherService.removeById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="测试swagger2"><a href="#测试swagger2" class="headerlink" title="测试swagger2"></a>测试swagger2</h2><p>启动服务, 打开浏览器访问 <a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a></p>
+<p>看到如下图说明接入swagger2成功</p>
+<p><img src="swagger2.png" alt="swagger2"></p>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>Java</tag>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>springboot返回json时间格式</title>
+    <url>/blog/2020/10/14/springboot%E8%BF%94%E5%9B%9Ejson%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F/</url>
+    <content><![CDATA[<p>默认情况下spring boot返回的json时间格式带有时区, 并且是世界标准时间 , 和我们的时间差了八个小时</p>
+<p>在<code>application.yml</code>中设置</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">jackson:</span></span><br><span class="line">    <span class="attr">date-format:</span> <span class="string">yyyy-MM-dd</span> <span class="string">HH:mm:ss</span></span><br><span class="line">    <span class="attr">time-zone:</span> <span class="string">GMT+8</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>Java</tag>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>虫儿飞</title>
+    <url>/blog/2020/10/07/%E8%99%AB%E5%84%BF%E9%A3%9E/</url>
+    <content><![CDATA[<p><img src="v.jpg" alt="傻小瓜"></p>
+<center>
+
+<p>黑黑的天空低垂</p>
+<p>亮亮的繁星相随</p>
+<p>虫儿飞</p>
+<p>虫儿飞</p>
+<p>你在思念谁</p>
+<p>天上的星星流泪</p>
+<p>地上的玫瑰枯萎</p>
+<p>冷风吹</p>
+<p> 冷风吹</p>
+<p>只要有你陪</p>
+<p>虫儿飞</p>
+<p>花儿睡</p>
+<p>一双又一对才美</p>
+<p>不怕天黑</p>
+<p>只怕心碎</p>
+<p>不管累不累</p>
+<p>也不管东南西北</p>
+</center>
+
+<p><img src="y.jpg" alt="傻小瓜"></p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>傻小瓜</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置npm镜像仓库</title>
+    <url>/blog/2020/10/04/%E9%85%8D%E7%BD%AEnpm%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[<p>NPM是Node提供的模块管理工具，npm默认的仓库地址是在国外网站，速度较慢，建议大家设置到淘宝镜像。但是切换镜像是比较麻烦的。推荐一款切换镜像的工具：nrm</p>
+<p>安装nrm，这里-g代表全局安装。可能需要一点儿时间</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install nrm -g</span><br></pre></td></tr></table></figure>
+
+<p>然后通过nrm ls命令查看npm的仓库列表,带*的就是当前选中的镜像仓库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">C:\Users\xiejinchi&gt;nrm ls</span><br><span class="line"></span><br><span class="line">  npm -------- https://registry.npmjs.org/</span><br><span class="line">  yarn ------- https://registry.yarnpkg.com/</span><br><span class="line">  cnpm ------- http://r.cnpmjs.org/</span><br><span class="line">* taobao ----- https://registry.npm.taobao.org/</span><br><span class="line">  nj --------- https://registry.nodejitsu.com/</span><br><span class="line">  npmMirror -- https://skimdb.npmjs.com/registry/</span><br><span class="line">  edunpm ----- http://registry.enpmjs.org/</span><br></pre></td></tr></table></figure>
+
+<p>通过nrm use taobao来指定要使用的镜像源</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nrm use taobao</span><br></pre></td></tr></table></figure>
+
+<p>然后通过nrm test npm 来测试速度：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nrm test npm</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>学习MyBatis-Plus</title>
     <url>/blog/2020/10/13/%E5%AD%A6%E4%B9%A0MyBatis-Plus/</url>
     <content><![CDATA[<h2 id="MyBatis-Plus简介"><a href="#MyBatis-Plus简介" class="headerlink" title="MyBatis-Plus简介"></a>MyBatis-Plus简介</h2><p>MyBatis-Plus（简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。</p>
@@ -297,6 +419,18 @@
 </ol>
 </blockquote>
 <h2 id="条件构造器"><a href="#条件构造器" class="headerlink" title="条件构造器"></a>条件构造器</h2><p><a href="https://baomidou.com/guide/wrapper.html#abstractwrapper">条件构造器官方文档</a></p>
+<h2 id="代码生成器"><a href="#代码生成器" class="headerlink" title="代码生成器"></a>代码生成器</h2><p>AutoGenerator 是 MyBatis-Plus 的代码生成器，通过 AutoGenerator 可以快速生成 Entity、Mapper、Mapper XML、Service、Controller 等各个模块的代码，极大的提升了开发效率。</p>
+<h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><p>MyBatis-Plus 从 <code>3.0.3</code> 之后移除了代码生成器与模板引擎的默认依赖，需要手动添加相关依赖：</p>
+<p>代码生成器依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-generator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>模板引擎 依赖，MyBatis-Plus 支持 Velocity（默认）、Freemarker、Beetl</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.velocity<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>velocity-engine-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="添加代码"><a href="#添加代码" class="headerlink" title="添加代码"></a>添加代码</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//代码生成器</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    AutoGenerator mpg = <span class="keyword">new</span> AutoGenerator();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 全局配置</span></span><br><span class="line">    GlobalConfig gc = <span class="keyword">new</span> GlobalConfig();</span><br><span class="line">    String projectPath = System.getProperty(<span class="string">&quot;user.dir&quot;</span>);</span><br><span class="line">    gc.setOutputDir(projectPath + <span class="string">&quot;/src/main/java&quot;</span>);</span><br><span class="line">    gc.setAuthor(<span class="string">&quot;xiejinchi&quot;</span>);</span><br><span class="line">    gc.setOpen(<span class="keyword">false</span>); <span class="comment">//生成后是否打开资源管理器</span></span><br><span class="line">    gc.setFileOverride(<span class="keyword">false</span>); <span class="comment">//重新生成时是否覆盖</span></span><br><span class="line">    gc.setServiceName(<span class="string">&quot;%sService&quot;</span>); <span class="comment">//去掉service接口的首字母I</span></span><br><span class="line">    gc.setIdType(IdType.ID_WORKER); <span class="comment">//主键策略</span></span><br><span class="line">    gc.setDateType(DateType.ONLY_DATE); <span class="comment">//定义生成的实体类中日期类型</span></span><br><span class="line">    gc.setSwagger2(<span class="keyword">true</span>); <span class="comment">//开启 Swagger2 模式</span></span><br><span class="line">    mpg.setGlobalConfig(gc);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数据源配置</span></span><br><span class="line">    DataSourceConfig dsc = <span class="keyword">new</span> DataSourceConfig();</span><br><span class="line">    dsc.setUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/mybatis_plus?serverTimezone=GMT%2B8&quot;</span>);</span><br><span class="line">    dsc.setDriverName(<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);</span><br><span class="line">    dsc.setUsername(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">    dsc.setPassword(<span class="string">&quot;garcon&quot;</span>);</span><br><span class="line">    mpg.setDataSource(dsc);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 包配置</span></span><br><span class="line">    PackageConfig pc = <span class="keyword">new</span> PackageConfig();</span><br><span class="line">    pc.setParent(<span class="string">&quot;com.example.demo&quot;</span>);</span><br><span class="line">    pc.setModuleName(<span class="string">&quot;user&quot;</span>); <span class="comment">//模块名</span></span><br><span class="line">    pc.setEntity(<span class="string">&quot;entity&quot;</span>);</span><br><span class="line">    pc.setMapper(<span class="string">&quot;mapper&quot;</span>);</span><br><span class="line">    pc.setService(<span class="string">&quot;service&quot;</span>);</span><br><span class="line">    pc.setController(<span class="string">&quot;controller&quot;</span>);</span><br><span class="line">    mpg.setPackageInfo(pc);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 策略配置</span></span><br><span class="line">    StrategyConfig strategy = <span class="keyword">new</span> StrategyConfig();</span><br><span class="line">    <span class="comment">//表名，多个英文逗号分割</span></span><br><span class="line">    strategy.setInclude(<span class="string">&quot;user&quot;</span>.split(<span class="string">&quot;,&quot;</span>));</span><br><span class="line">    <span class="comment">//数据库映射到实体类的命名策略</span></span><br><span class="line">    strategy.setNaming(NamingStrategy.underline_to_camel);</span><br><span class="line">    <span class="comment">//数据库表映射到实体类的命名策略</span></span><br><span class="line">    strategy.setColumnNaming(NamingStrategy.underline_to_camel);</span><br><span class="line">    <span class="comment">//生成实体时去掉表前缀</span></span><br><span class="line">    strategy.setTablePrefix(pc.getModuleName() + <span class="string">&quot;_&quot;</span>);</span><br><span class="line">    <span class="comment">//你自己的父类实体,没有就不用设置!</span></span><br><span class="line">    <span class="comment">//strategy.setSuperEntityClass(&quot;&quot;);</span></span><br><span class="line">    <span class="comment">//Lombok模型</span></span><br><span class="line">    strategy.setEntityLombokModel(<span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">//reset ful api风格控制器</span></span><br><span class="line">    strategy.setRestControllerStyle(<span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">// 你自己的父类控制器,没有就不用设置!</span></span><br><span class="line">    <span class="comment">//strategy.setSuperControllerClass(&quot;&quot;);</span></span><br><span class="line">    <span class="comment">//url中驼峰转连接字符</span></span><br><span class="line">    strategy.setControllerMappingHyphenStyle(<span class="keyword">true</span>);</span><br><span class="line">    mpg.setStrategy(strategy);</span><br><span class="line">    <span class="comment">//执行</span></span><br><span class="line">    mpg.execute();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>后端</category>
@@ -305,64 +439,6 @@
         <tag>后端</tag>
         <tag>Java</tag>
         <tag>MyBatis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>虫儿飞</title>
-    <url>/blog/2020/10/07/%E8%99%AB%E5%84%BF%E9%A3%9E/</url>
-    <content><![CDATA[<p><img src="v.jpg" alt="傻小瓜"></p>
-<center>
-
-<p>黑黑的天空低垂</p>
-<p>亮亮的繁星相随</p>
-<p>虫儿飞</p>
-<p>虫儿飞</p>
-<p>你在思念谁</p>
-<p>天上的星星流泪</p>
-<p>地上的玫瑰枯萎</p>
-<p>冷风吹</p>
-<p> 冷风吹</p>
-<p>只要有你陪</p>
-<p>虫儿飞</p>
-<p>花儿睡</p>
-<p>一双又一对才美</p>
-<p>不怕天黑</p>
-<p>只怕心碎</p>
-<p>不管累不累</p>
-<p>也不管东南西北</p>
-</center>
-
-<p><img src="y.jpg" alt="傻小瓜"></p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>傻小瓜</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>配置npm镜像仓库</title>
-    <url>/blog/2020/10/04/%E9%85%8D%E7%BD%AEnpm%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</url>
-    <content><![CDATA[<p>NPM是Node提供的模块管理工具，npm默认的仓库地址是在国外网站，速度较慢，建议大家设置到淘宝镜像。但是切换镜像是比较麻烦的。推荐一款切换镜像的工具：nrm</p>
-<p>安装nrm，这里-g代表全局安装。可能需要一点儿时间</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install nrm -g</span><br></pre></td></tr></table></figure>
-
-<p>然后通过nrm ls命令查看npm的仓库列表,带*的就是当前选中的镜像仓库：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">C:\Users\xiejinchi&gt;nrm ls</span><br><span class="line"></span><br><span class="line">  npm -------- https://registry.npmjs.org/</span><br><span class="line">  yarn ------- https://registry.yarnpkg.com/</span><br><span class="line">  cnpm ------- http://r.cnpmjs.org/</span><br><span class="line">* taobao ----- https://registry.npm.taobao.org/</span><br><span class="line">  nj --------- https://registry.nodejitsu.com/</span><br><span class="line">  npmMirror -- https://skimdb.npmjs.com/registry/</span><br><span class="line">  edunpm ----- http://registry.enpmjs.org/</span><br></pre></td></tr></table></figure>
-
-<p>通过nrm use taobao来指定要使用的镜像源</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nrm use taobao</span><br></pre></td></tr></table></figure>
-
-<p>然后通过nrm test npm 来测试速度：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nrm test npm</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>node</tag>
       </tags>
   </entry>
   <entry>
