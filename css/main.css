@@ -1191,7 +1191,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c8bdff;
+  background: #6ab106;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2697,7 +2697,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 body {
-  background: url("https://lemon6.gitee.io/blog/images/bg.jpg");
+  background: url("https://lemon6.gitee.io/images/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
